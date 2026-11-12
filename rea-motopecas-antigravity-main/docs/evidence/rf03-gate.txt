@@ -1,0 +1,3 @@
+GATE PASS - docs/evidence/gate-report.json
+/opt/pyvenv/bin/python -m compileall -q app => 0
+/opt/pyvenv/bin/python -m pytest -q tests => 0

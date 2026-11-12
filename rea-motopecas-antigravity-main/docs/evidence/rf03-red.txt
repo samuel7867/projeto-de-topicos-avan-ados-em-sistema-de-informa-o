@@ -1,0 +1,54 @@
+F.F                                                                      [100%]
+=================================== FAILURES ===================================
+_______________________ test_rf03_categoria_normalizada ________________________
+
+client = <starlette.testclient.TestClient object at 0x7fd51f800ad0>
+
+    def test_rf03_categoria_normalizada(client):
+        referencia = client.get('/api/products', params={'category': 'Freios'}).json()
+        assert len(referencia) == 2
+        for categoria in ('freios', 'FREIOS', '  Freios  '):
+            resposta = client.get('/api/products', params={'category': categoria})
+            assert resposta.status_code == 200
+>           assert [p['sku'] for p in resposta.json()] == [p['sku'] for p in referencia]
+E           AssertionError: assert [] == ['R2-FR-001', 'R2-FR-002']
+E             
+E             Right contains 2 more items, first extra item: 'R2-FR-001'
+E             
+E             Full diff:
+E             + []
+E             - [
+E             -     'R2-FR-001',
+E             -     'R2-FR-002',
+E             - ]
+
+tests/test_rf03_categoria.py:9: AssertionError
+____________________ test_rf03_combinacao_categoria_e_busca ____________________
+
+client = <starlette.testclient.TestClient object at 0x7fd51f86f610>
+
+    def test_rf03_combinacao_categoria_e_busca(client):
+        resposta = client.get('/api/products', params={'category': ' filtros ', 'q': 'óleo'})
+        assert resposta.status_code == 200
+>       assert len(resposta.json()) == 1
+E       assert 0 == 1
+E        +  where 0 = len([])
+E        +    where [] = json()
+E        +      where json = <Response [200 OK]>.json
+
+tests/test_rf03_categoria.py:19: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_rf03_categoria.py::test_rf03_categoria_normalizada - AssertionError: assert [] == ['R2-FR-001', 'R2-FR-002']
+  
+  Right contains 2 more items, first extra item: 'R2-FR-001'
+  
+  Full diff:
+  + []
+  - [
+  -     'R2-FR-001',
+  -     'R2-FR-002',
+  - ]
+FAILED tests/test_rf03_categoria.py::test_rf03_combinacao_categoria_e_busca - assert 0 == 1
+ +  where 0 = len([])
+ +    where [] = json()
+ +      where json = <Response [200 OK]>.json
