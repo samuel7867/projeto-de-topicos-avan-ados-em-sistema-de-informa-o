@@ -100,17 +100,6 @@ python -m pytest -q
 
 Os resultados devem ser confirmados ao executar os testes na versão atual do repositório.
 
-## Evidências
-
-As evidências do projeto incluem:
-
-- Aplicação executada localmente.
-- Funcionamento do catálogo e do filtro por categoria.
-- Testes automatizados.
-- Alterações no código.
-- Capturas de tela do sistema.
-- Histórico de desenvolvimento no GitHub.
-
 ## Resultados e conclusão
 
 A melhoria do requisito RF-03 tornou a filtragem por categoria mais consistente, permitindo reconhecer diferentes formas de escrita.
